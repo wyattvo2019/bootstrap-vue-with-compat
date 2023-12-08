@@ -68,7 +68,19 @@
 </template>
 
 <script>
-  export default {
+export default {
+  data() {
+    return {
+      student: {
+        id: null,//Math.floor(Math.random()*100),
+        name:'',
+        age: null,
+        phone: '',
+        address: ''
+      },
+    }
+  },
+  compatConfig: { MODE: 2 },
   props:{
     editStudent:{
       type: Object,
@@ -84,17 +96,7 @@
       }
     },
   },
-  data() {
-    return {
-      student: {
-        id: null,//Math.floor(Math.random()*100),
-        name:'',
-        age: null,
-        phone: '',
-        address: ''
-      },
-    }
-  },
+
   methods: {
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity()
