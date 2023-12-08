@@ -40,9 +40,6 @@
 <script>
 import StudentComponent from './StudentComponent.vue'
 export default {
-  components: {
-    StudentComponent,
-  },
   data(){
     return {
       editStudent:{},
@@ -60,6 +57,11 @@ export default {
       selected: []
     }
   },
+  compatConfig: { MODE: 2 },
+  components: {
+    StudentComponent,
+  },
+
   watch:{
     selected(){
       if(this.selected.length == 1){
@@ -73,12 +75,16 @@ export default {
     },
   },
   methods: {
+    deleteAStudentById(id){
+      for(let i =0;i < this.items.length;i++){
+        if(this.items[i].id == id) this.items.splice(i, 1);
+      }
+    },
     clickDelete(){
       if(this.selected.length >0){
         //delete
         for(let i=0; i < this.selected.length; i++){
-          let index = this.items.findIndex((c)=> c.id = this.selected[0].id);
-          this.items.splice(index,1);
+          this.deleteAStudentById(this.selected[i].id)
         }
       }else{
         return;
