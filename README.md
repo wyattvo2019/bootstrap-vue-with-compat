@@ -21,3 +21,87 @@ https://bootstrap-vue.org/docs/components/table#row-select-support
 ```
 https://bootstrap-vue.org/docs/components/modal#prevent-closing
 ```
+## 5. Update the form Student:
+```
+<!-- Name -->
+        <b-form-group
+          label="Name"
+          label-for="name-input"
+          invalid-feedback="Name is required"
+          :state="nameState"
+        >
+          <b-form-input
+            id="name-input"
+            v-model="student.name"
+            :state="nameState"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <!-- Age -->
+        <b-form-group
+          label="Age"
+          label-for="age-input"
+          invalid-feedback="Age is required"
+          :state="ageState"
+        >
+          <b-form-input
+            id="age-input"
+            v-model="student.age"
+            :state="ageState"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <!-- Phone -->
+        <b-form-group
+          label="Phone"
+          label-for="phone-input"
+          invalid-feedback="Phone is required"
+          :state="phoneState"
+        >
+          <b-form-input
+            id="phone-input"
+            v-model="student.phone"
+            :state="phoneState"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <!-- Address -->
+        <b-form-group
+          label="Adress"
+          label-for="addess-input"
+          invalid-feedback="Address is required"
+          :state="addressState"
+        >
+          <b-form-input
+            id="address-input"
+            v-model="student.address"
+            :state="addressState"
+            required
+          ></b-form-input>
+        </b-form-group>
+..........................
+    data() {
+      return {
+        student: {
+          id: '',
+          name: '',
+          age: '',
+          phone: '',
+          address: ''
+        },
+        nameState: null,
+        ageState: null,
+        phoneState: null,
+        addressState: null
+      }
+..........................
+      checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.nameState = valid
+        this.ageState = valid
+        this.phoneState = valid
+        this.addressState = valid
+        return valid
+      },
+...........................
+```
