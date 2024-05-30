@@ -1,22 +1,8 @@
 <template>
   <div>
-    <b-form-group
-      label="Selection mode:"
-      label-for="table-select-mode-select"
-      label-cols-md="4"
-    >
-      <b-form-select
-        id="table-select-mode-select"
-        v-model="selectMode"
-        :options="modes"
-        class="mb-3"
-      ></b-form-select>
-    </b-form-group>
-
     <b-table
       :items="items"
       :fields="fields"
-      :select-mode="selectMode"
       responsive="sm"
       ref="selectableTable"
       selectable
@@ -37,8 +23,8 @@
     <p>
       <b-button size="sm" @click="selectAllRows">Select all</b-button>
       <b-button size="sm" @click="clearSelected">Clear selected</b-button>
-      <b-button size="sm" @click="selectThirdRow">Select 3rd row</b-button>
-      <b-button size="sm" @click="unselectThirdRow">Unselect 3rd row</b-button>
+      <b-button size="sm" @click="clickEdit">EDIT</b-button>
+      <b-button size="sm" @click="clickDelete">DELETE</b-button>
     </p>
     <p>
       Selected Rows:<br>
@@ -51,7 +37,6 @@
   export default {
     data() {
       return {
-        modes: ['multi', 'single', 'range'],
         fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
         items: [
           { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
@@ -59,7 +44,6 @@
           { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
           { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
         ],
-        selectMode: 'multi',
         selected: []
       }
     },
@@ -73,14 +57,6 @@
       clearSelected() {
         this.$refs.selectableTable.clearSelected()
       },
-      selectThirdRow() {
-        // Rows are indexed from 0, so the third row is index 2
-        this.$refs.selectableTable.selectRow(2)
-      },
-      unselectThirdRow() {
-        // Rows are indexed from 0, so the third row is index 2
-        this.$refs.selectableTable.unselectRow(2)
-      }
     }
   }
 </script>
