@@ -10,6 +10,7 @@
       @ok="handleOk"
     >
       <form ref="form" @submit.stop.prevent="handleSubmit">
+        <!-- Name -->
         <b-form-group
           label="Name"
           label-for="name-input"
@@ -23,6 +24,7 @@
             required
           ></b-form-input>
         </b-form-group>
+        <!-- Age -->
         <b-form-group
           label="Age"
           label-for="age-input"
@@ -36,8 +38,9 @@
             required
           ></b-form-input>
         </b-form-group>
+        <!-- Phone -->
         <b-form-group
-          label="phone"
+          label="Phone"
           label-for="phone-input"
           invalid-feedback="Phone is required"
           :state="phoneState"
@@ -49,9 +52,10 @@
             required
           ></b-form-input>
         </b-form-group>
+        <!-- Address -->
         <b-form-group
-          label="Address"
-          label-for="address-input"
+          label="Adress"
+          label-for="addess-input"
           invalid-feedback="Address is required"
           :state="addressState"
         >
@@ -62,73 +66,86 @@
             required
           ></b-form-input>
         </b-form-group>
+
       </form>
     </b-modal>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      student: {
-        id: null,//Math.floor(Math.random()*100),
-        name:'',
-        age: null,
-        phone: '',
-        address: ''
+  export default {
+    data() {
+      return {
+        student: {
+          id: '',
+          name: '',
+          age: '',
+          phone: '',
+          address: ''
+        },
+        nameState: null,
+        ageState: null,
+        phoneState: null,
+        addressState: null
+      }
+    },
+    props:{
+      itemStudent:{
+        type: Object,
+        default: null
+      }
+    },
+    watch:{
+      itemStudent(){
+        if(this.itemStudent){
+          this.student = Object.assign({},this.itemStudent);
+        }
+        else{
+          this.resetFormStudent();
+        }
+      }
+    },
+    methods: {
+      resetFormStudent(){
+        this.student = {
+          id: '',
+          name: '',
+          age: '',
+          phone: '',
+          address: ''
+        };
       },
-    }
-  },
-  compatConfig: { MODE: 2 },
-  props:{
-    editStudent:{
-      type: Object,
-      default: null,
-    }
-  },
-  watch:{
-    editStudent(){
-      if(this.editStudent){
-        this.student = Object.assign({}, this.editStudent);
-      }else{
-        this.student = {}
+      checkFormValidity() {
+        const valid = this.$refs.form.checkValidity()
+        this.nameState = valid
+        this.ageState = valid
+        this.phoneState = valid
+        this.addressState = valid
+        return valid
+      },
+      resetModal() {
+        this.name = ''
+        this.nameState = null
+      },
+      handleOk(bvModalEvent) {
+        // Prevent modal from closing
+        bvModalEvent.preventDefault()
+        // Trigger submit handler
+        this.handleSubmit()
+      },
+      handleSubmit() {
+        // Exit when the form isn't valid
+        if (!this.checkFormValidity()) {
+          return
+        }
+        // Push the student to main coponent to save
+        this.$emit('save', this.student);
+        // Hide the modal manually
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-prevent-closing')
+        })
+        this.resetFormStudent();
       }
-    },
-  },
-
-  methods: {
-    checkFormValidity() {
-      const valid = this.$refs.form.checkValidity()
-      this.nameState = valid
-      this.ageState = valid
-      this.phoneState = valid
-      this.addressState = valid
-      return valid
-    },
-    resetModal() {
-      this.name = ''
-      this.nameState = null
-    },
-    handleOk(bvModalEvent) {
-      // Prevent modal from closing
-      bvModalEvent.preventDefault()
-      // Trigger submit handler
-      this.handleSubmit()
-    },
-    handleSubmit() {
-      // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return
-      }
-      // Push the name to submitted names
-      // this.submittedNames.push(this.name)
-      this.$emit("save", this.student);
-      // Hide the modal manually
-      this.$nextTick(() => {
-        this.$bvModal.hide('modal-prevent-closing')
-      })
     }
-  }
   }
 </script>
