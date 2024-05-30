@@ -1,5 +1,7 @@
 <template>
   <div>
+    <h1>Student</h1>
+    <Student />
     <b-table
       :items="items"
       :fields="fields"
@@ -34,6 +36,7 @@
 </template>
 
 <script>
+import Student from './StudentComponent.vue';
   export default {
     data() {
       return {
@@ -46,6 +49,9 @@
         ],
         selected: []
       }
+    },
+    components:{
+      Student,
     },
     methods: {
       onRowSelected(items) {

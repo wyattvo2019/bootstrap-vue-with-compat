@@ -105,3 +105,15 @@ https://bootstrap-vue.org/docs/components/modal#prevent-closing
       },
 ...........................
 ```
+
+## 6. Use student component
+```
+    <Student />
+    .............
+    import Student from './StudentComponent.vue';
+..................
+components:{
+     Student,
+   },
+
+```
