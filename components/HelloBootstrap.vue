@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Student</h1>
-    <Student />
+    <Student @save="saveStudent"/>
     <b-table
       :items="items"
       :fields="fields"
@@ -54,6 +54,17 @@ import Student from './StudentComponent.vue';
       Student,
     },
     methods: {
+      saveStudent(itemStudent){
+        itemStudent.id = this.findMaxID() + 1;
+        this.items.push(itemStudent);
+      },
+      findMaxID(){
+        let maxID = this.items[0].id;
+        for(let i = 1; i < this.items.length; i++){
+          if(this.items[i].id > maxID) maxID = this.items[i].id;
+        }
+        return maxID
+      },
       onRowSelected(items) {
         this.selected = items
       },

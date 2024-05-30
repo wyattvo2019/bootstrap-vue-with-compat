@@ -113,7 +113,8 @@
         if (!this.checkFormValidity()) {
           return
         }
-        // Push the name to submitted names
+        // Push the student to main coponent to save
+        this.$emit('save', this.student);
         // Hide the modal manually
         this.$nextTick(() => {
           this.$bvModal.hide('modal-prevent-closing')
