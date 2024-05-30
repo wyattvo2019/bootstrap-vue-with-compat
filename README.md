@@ -17,3 +17,7 @@ https://bootstrap-vue.org/docs/components/table#row-select-support
           { id: 2, name: "Le Van D", age: 27, phone: 84785493144, address: "Ha Nam" },
         ],
 ```
+## 4. Get form for student from:
+```
+https://bootstrap-vue.org/docs/components/modal#prevent-closing
+```
