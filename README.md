@@ -208,3 +208,15 @@ this.$emit('save', this.student);
         }
       },
 ```
+## 10. Feature delete One or More Student:
+```
+      clickDelete(){
+        for(let i = 0; i < this.selected.length; i++){
+          this.deleteOneStudentById(this.selected[i].id);
+        }
+      },
+      deleteOneStudentById(id){
+        let index = this.items.findIndex((c)=>c.id === id);
+        this.items.splice(index,1);
+      },
+```

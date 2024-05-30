@@ -89,6 +89,15 @@ import Student from './StudentComponent.vue';
         this.student = this.selected[0];
         this.$bvModal.show('modal-prevent-closing')
       },
+      clickDelete(){
+        for(let i = 0; i < this.selected.length; i++){
+          this.deleteOneStudentById(this.selected[i].id);
+        }
+      },
+      deleteOneStudentById(id){
+        let index = this.items.findIndex((c)=>c.id === id);
+        this.items.splice(index,1);
+      },
       onRowSelected(items) {
         this.selected = items
       },
