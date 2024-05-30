@@ -137,4 +137,58 @@ this.$emit('save', this.student);
        return maxID
      },
 ```
-## 8. 
+## 8. Feature Edit One Student
+```
+#App
+   <Student @save="saveStudent" :itemStudent="this.student" />
+………
+     <b-button size="sm" @click="clickEdit" :disabled="disableEditButton">EDIT</b-button>
+     <b-button size="sm" @click="clickDelete" :disabled="disableDeleteButton">DELETE</b-button>
+………..
+       student:{},
+       selected: [],
+       disableEditButton: true,
+       disableDeleteButton:true,
+…………
+   watch:{
+     selected(){
+       if(this.selected.length == 1) this.disableEditButton = false;
+       else this.disableEditButton = true;
+       if(this.selected.length != 0) this.disableDeleteButton = false;
+       else this.disableDeleteButton = true;
+     }
+   },
+…………
+     clickEdit(){
+       this.student = this.selected[0];
+       this.$bvModal.show('modal-prevent-closing')
+     },
+#Student
+   props:{
+     itemStudent:{
+       type: Object,
+       default: null
+     }
+   },
+   watch:{
+     itemStudent(){
+       if(this.itemStudent){
+         this.student = Object.assign({},this.itemStudent);
+       }
+       else{
+         this.resetFormStudent();
+       }
+     }
+   },
+   methods: {
+     resetFormStudent(){
+       this.student = {
+         id: '',
+         name: '',
+         age: '',
+         phone: '',
+         address: ''
+       };
+     },
+
+```

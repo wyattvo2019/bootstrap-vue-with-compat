@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Student</h1>
-    <Student @save="saveStudent"/>
+    <Student @save="saveStudent" :itemStudent="this.student" />
     <b-table
       :items="items"
       :fields="fields"
@@ -25,12 +25,13 @@
     <p>
       <b-button size="sm" @click="selectAllRows">Select all</b-button>
       <b-button size="sm" @click="clearSelected">Clear selected</b-button>
-      <b-button size="sm" @click="clickEdit">EDIT</b-button>
-      <b-button size="sm" @click="clickDelete">DELETE</b-button>
+      <b-button size="sm" @click="clickEdit" :disabled="disableEditButton">EDIT</b-button>
+      <b-button size="sm" @click="clickDelete" :disabled="disableDeleteButton">DELETE</b-button>
     </p>
     <p>
       Selected Rows:<br>
       {{ selected }}
+      {{this.selected.length}}
     </p>
   </div>
 </template>
@@ -47,11 +48,22 @@ import Student from './StudentComponent.vue';
           { id: 1, name: "Le Van C", age: 26, phone: 84745896315, address: "Vinh Phuc" },
           { id: 2, name: "Le Van D", age: 27, phone: 84785493144, address: "Ha Nam" },
         ],
-        selected: []
+        student:{},
+        selected: [],
+        disableEditButton: true,
+        disableDeleteButton:true,
       }
     },
     components:{
       Student,
+    },
+    watch:{
+      selected(){
+        if(this.selected.length == 1) this.disableEditButton = false;
+        else this.disableEditButton = true;
+        if(this.selected.length != 0) this.disableDeleteButton = false;
+        else this.disableDeleteButton = true;
+      }
     },
     methods: {
       saveStudent(itemStudent){
@@ -64,6 +76,10 @@ import Student from './StudentComponent.vue';
           if(this.items[i].id > maxID) maxID = this.items[i].id;
         }
         return maxID
+      },
+      clickEdit(){
+        this.student = this.selected[0];
+        this.$bvModal.show('modal-prevent-closing')
       },
       onRowSelected(items) {
         this.selected = items

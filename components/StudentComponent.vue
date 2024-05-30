@@ -89,7 +89,32 @@
         addressState: null
       }
     },
+    props:{
+      itemStudent:{
+        type: Object,
+        default: null
+      }
+    },
+    watch:{
+      itemStudent(){
+        if(this.itemStudent){
+          this.student = Object.assign({},this.itemStudent);
+        }
+        else{
+          this.resetFormStudent();
+        }
+      }
+    },
     methods: {
+      resetFormStudent(){
+        this.student = {
+          id: '',
+          name: '',
+          age: '',
+          phone: '',
+          address: ''
+        };
+      },
       checkFormValidity() {
         const valid = this.$refs.form.checkValidity()
         this.nameState = valid
