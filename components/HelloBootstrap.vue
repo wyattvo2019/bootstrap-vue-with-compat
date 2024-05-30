@@ -37,12 +37,12 @@
   export default {
     data() {
       return {
-        fields: ['selected', 'isActive', 'age', 'first_name', 'last_name'],
+        fields: ['selected', 'id', 'name', 'age', 'phone', 'address'],
         items: [
-          { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+          { id: 4, name: "Le Van A", age: 28, phone: 84159358429, address: "Ha Noi" },
+          { id: 3, name: "Le Van B", age: 29, phone: 84789654137, address: "Thai Binh" },
+          { id: 1, name: "Le Van C", age: 26, phone: 84745896315, address: "Vinh Phuc" },
+          { id: 2, name: "Le Van D", age: 27, phone: 84785493144, address: "Ha Nam" },
         ],
         selected: []
       }
