@@ -67,8 +67,16 @@ import Student from './StudentComponent.vue';
     },
     methods: {
       saveStudent(itemStudent){
-        itemStudent.id = this.findMaxID() + 1;
-        this.items.push(itemStudent);
+        console.log(itemStudent.id !='');
+        if(itemStudent.id !=''){
+          //Update the student
+          let index = this.items.findIndex((c)=>c.id === itemStudent.id);
+          this.items.splice(index,1,itemStudent);
+        }else{
+          //Add new Student
+          itemStudent.id = this.findMaxID() + 1;
+          this.items.push(itemStudent);
+        }
       },
       findMaxID(){
         let maxID = this.items[0].id;

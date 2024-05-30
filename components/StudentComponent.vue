@@ -144,6 +144,7 @@
         this.$nextTick(() => {
           this.$bvModal.hide('modal-prevent-closing')
         })
+        this.resetFormStudent();
       }
     }
   }

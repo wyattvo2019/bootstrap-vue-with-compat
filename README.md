@@ -192,3 +192,19 @@ this.$emit('save', this.student);
      },
 
 ```
+
+## 9. Update function save Student
+```
+      saveStudent(itemStudent){
+        console.log(itemStudent.id !='');
+        if(itemStudent.id !=''){
+          //Update the student
+          let index = this.items.findIndex((c)=>c.id === itemStudent.id);
+          this.items.splice(index,1,itemStudent);
+        }else{
+          //Add new Student
+          itemStudent.id = this.findMaxID() + 1;
+          this.items.push(itemStudent);
+        }
+      },
+```
